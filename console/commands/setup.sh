@@ -96,13 +96,20 @@ if [ ! -f "${COMPOSER_DIR}/composer.lock" ]; then
     printf "${GREEN}Creating non existing '${COMPOSER_DIR}/composer.lock'${COLOR_RESET}\n"
     echo "{}" > ${COMPOSER_DIR}/composer.lock
 fi
-
+if [ ! -d "${DB_DUMP_DIR}" ]; then
+    printf "${GREEN}Creating non existing '${DB_DUMP_DIR} directory${COLOR_RESET}\n"
+    mkdir -p ${DB_DUMP_DIR}
+fi
 read -p "Composer bin dir: [${BIN_DIR}] " ANSWER_BIN_DIR
 BIN_DIR=${ANSWER_BIN_DIR:-${BIN_DIR}}
 
 read -p "Database dumps dir: [${DB_DUMP_DIR}] " ANSWER_DB_DUMP_DIR
 DB_DUMP_DIR=${ANSWER_DB_DUMP_DIR:-${DB_DUMP_DIR}}
 
+if [ ! -d "${DB_DUMP_DIR}" ]; then
+    printf "${GREEN}Creating non existing '${DB_DUMP_DIR} directory${COLOR_RESET}\n"
+    mkdir -p ${DB_DUMP_DIR}
+fi
 read -p "Database name: [${MYSQL_DATABASE}] " ANSWER_MYSQL_DATABASE
 MYSQL_DATABASE=${ANSWER_MYSQL_DATABASE:-${MYSQL_DATABASE}}
 

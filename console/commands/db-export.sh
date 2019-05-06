@@ -28,6 +28,14 @@ sync_all_from_container_to_host()
     ${COMMANDS_DIR}/start.sh
 }
 
+dbexport()
+{
+    printf "${GREEN}Creating db dump ${DB_NAME}${COLOR_RESET}\n"
+    ${COMMANDS_DIR}/magerun.sh db:dump --quiet --no-interaction --add-routines --strip="@stripped pulsestorm_commercebug_log" --compression gzip ${DB_DUMP_DIR}/${DB_NAME}
+    sync_all_from_container_to_host
+    printf "${GREEN}Finished db dump${COLOR_RESET}\n"
+}
+
 
 : ${EXEC_OPTIONS:=""}
 
@@ -53,6 +61,4 @@ fi
 
 DB_NAME=`date +%Y-%m-%d-%T`
 
-${COMMANDS_DIR}/exec.sh mkdir ${DB_DUMP_DIR} || true
-${COMMANDS_DIR}/magerun.sh db:dump --quiet --no-interaction --add-routines --strip="@stripped pulsestorm_commercebug_log" --compression gzip ${DB_DUMP_DIR}/${DB_NAME}
-sync_all_from_container_to_host
+dbexport

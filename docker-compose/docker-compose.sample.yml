@@ -7,10 +7,10 @@ services:
       - ../.composer:/var/www/.composer
       - sockdata:/sock
       - ./config/dockergento/nginx/conf/default.conf:/var/www/conf/nginx/default.conf
-      -../dbdumps:/var/www/dbdumps
+      - ./dbdumps:/var/www/dbdumps
     environment:
       PHP_IDE_CONFIG: serverName=localhost
-    depends_on:
+    depends_on:   
       - db
 
   nginx:
@@ -27,10 +27,10 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: magento
-      MYSQL_USER: magento
-      MYSQL_PASSWORD: magento
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - dbdata:/var/lib/mysql
 
