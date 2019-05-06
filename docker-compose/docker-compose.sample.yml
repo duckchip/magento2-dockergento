@@ -7,6 +7,7 @@ services:
       - ../.composer:/var/www/.composer
       - sockdata:/sock
       - ./config/dockergento/nginx/conf/default.conf:/var/www/conf/nginx/default.conf
+      -../dbdumps:/var/www/dbdumps
     environment:
       PHP_IDE_CONFIG: serverName=localhost
     depends_on:
@@ -19,6 +20,7 @@ services:
     volumes: *appvolumes
     depends_on:
       - phpfpm
+      - redis
 
   db:
     image: mysql:5.7
@@ -39,6 +41,9 @@ services:
     volumes: *appvolumes
     depends_on:
       - phpfpm
+
+  redis:
+    image: redis
 
 volumes:
   dbdata:

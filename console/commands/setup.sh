@@ -100,6 +100,21 @@ fi
 read -p "Composer bin dir: [${BIN_DIR}] " ANSWER_BIN_DIR
 BIN_DIR=${ANSWER_BIN_DIR:-${BIN_DIR}}
 
+read -p "Database dumps dir: [${DB_DUMP_DIR}] " ANSWER_DB_DUMP_DIR
+DB_DUMP_DIR=${ANSWER_DB_DUMP_DIR:-${DB_DUMP_DIR}}
+
+read -p "Database name: [${MYSQL_DATABASE}] " ANSWER_MYSQL_DATABASE
+MYSQL_DATABASE=${ANSWER_MYSQL_DATABASE:-${MYSQL_DATABASE}}
+
+read -p "Database user: [${MYSQL_USER}] " ANSWER_MYSQL_USER
+ANSWER_MYSQL_USER=${ANSWER_MYSQL_USER:-${MYSQL_USER}}
+
+read -p "Database password: [${MYSQL_PASSWORD}] " ANSWER_MYSQL_PASSWORD
+ANSWER_MYSQL_PASSWORD=${ANSWER_MYSQL_PASSWORD:-${MYSQL_PASSWORD}}
+
+read -p "Database root password: [${MYSQL_ROOT_PASSWORD}] " ANSWER_MYSQL_ROOT_PASSWORD
+ANSWER_MYSQL_ROOT_PASSWORD=${ANSWER_MYSQL_ROOT_PASSWORD:-${MYSQL_ROOT_PASSWORD}}
+
 printf "${GREEN}Setting bind configuration for files in git repository${COLOR_RESET}\n"
 add_git_bind_paths_in_file()
 {
@@ -176,6 +191,10 @@ cat << EOF > ./${DOCKERGENTO_CONFIG_DIR}/properties
 MAGENTO_DIR="${MAGENTO_DIR}"
 COMPOSER_DIR="${COMPOSER_DIR}"
 BIN_DIR="${BIN_DIR}"
+MYSQL_DATABASE="${MYSQL_DATABASE}"
+MYSQL_USER="${MYSQL_USER}"
+MYSQL_PASSWORD="${MYSQL_PASSWORD}"
+MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"
 EOF
 
 # Stop running containers in case that setup was executed in an already running project

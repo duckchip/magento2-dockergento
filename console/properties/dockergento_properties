@@ -3,6 +3,12 @@ COMPOSER_DIR="."
 BIN_DIR="./vendor/bin"
 GENERATED_DIR="generated" # Set to "var/generation" for magento >=2.1
 
+DB_DUMP_DIR="dbdumps"
+MYSQL_DATABASE="magento"
+MYSQL_ROOT_PASSWORD="root"
+MYSQL_USER="magento"
+MYSQL_PASSWORD="magento"
+
 HOST_DIR="."
 
 DOCKER_COMPOSE_FILE="docker-compose.yml"
